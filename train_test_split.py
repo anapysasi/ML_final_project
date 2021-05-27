@@ -54,4 +54,4 @@ def test_label_func():
         if photo == 'Tamotoes':
             photo = 'Tomato'
         test_label.append(photo)
-    return test_label
+    return files, test_label
