@@ -45,13 +45,24 @@ def test_label_func():
     data_path = os.path.join('data/Test', '*g')
     files = glob.glob(data_path)
 
+    test_label_fruit = list()
     test_label = list()
+    label = None
     for f in files:
         photo = re.sub(r"data/Test/", "", f)
         photo = re.findall(r"[a-zA-Z]", photo)
         photo = ''.join(photo)
         photo = re.sub(r"png", "", photo)
+        if photo == 'Apple':
+            label = 0
+        if photo == 'Banana':
+            label = 1
+        if photo == 'Orange':
+            label = 2
         if photo == 'Tamotoes':
             photo = 'Tomato'
-        test_label.append(photo)
-    return files, test_label
+            label = 3
+        test_label_fruit.append(photo)
+        test_label.append(label)
+    return files, test_label, test_label_fruit
+
