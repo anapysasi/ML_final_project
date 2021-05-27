@@ -12,8 +12,8 @@ import re
 
 def train_generator_func(info=False, image=False):
     """
-    :param info: Prints information about the generator.
-    :param image: Shows some of the images with the corresponding label
+    :param info: If True prints information about the generator.
+    :param image: If True shows some of the images with the corresponding label
     :return: train data generator
     """
 
