@@ -32,4 +32,4 @@ for f1 in files:
     results.append(r)
 
 accuracy = accuracy_score(results, test_label)
-print('The accuracy score is:', accuracy)
+print('\n\nThe accuracy score is:', accuracy)
