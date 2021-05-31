@@ -4,7 +4,7 @@ from train_test_split import train_generator_func
 from train_test_split import test_label_func
 from sklearn.metrics import accuracy_score
 
-train_generator = train_generator_func(info=True)
+train_generator = train_generator_func(info=True, )
 files, test_label, test_label_fruit = test_label_func()
 
 image_classifier = tf.keras.Sequential()
