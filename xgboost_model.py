@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore')
 
 x_train, y_train, x_test, y_test = train_generator_func()
 print(x_train.shape[0], 'train samples')
-print(x_test.shape[0], 'test samples')
+print(x_test.shape[0], 'test samples \n')
 
 # Create XGB Classifier object
 xgb_clf = xgb.XGBClassifier(objective="multi:softmax")
