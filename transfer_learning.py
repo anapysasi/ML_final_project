@@ -25,10 +25,6 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 np.random.seed(32)
 
-gpus = tf.config.experimental.list_physical_devices('GPU')
-tf.config.experimental.set_memory_growth(gpus[0], True)
-
-
 # Specify the base directory where images are located.
 base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
 # Specify the traning, validation, and test dirrectories.
@@ -64,7 +60,7 @@ conv_base = InceptionV3(weights = 'imagenet', #Useing the inception_v3 CNN that 
 InceptionV3_model = conv_base.output
 pool = GlobalAveragePooling2D()(InceptionV3_model)
 dense_1 = layers.Dense(512, activation = 'relu')(pool)
-output = layers.Dense(120, activation = 'softmax')(dense_1)
+output = layers.Dense(4, activation = 'softmax')(dense_1)
 
 # Create an example of the Archictecture to plot on a graph
 model_example = models.Model(inputs=conv_base.input, outputs=output)
@@ -83,10 +79,9 @@ model_InceptionV3.compile(loss='categorical_crossentropy',
 print(device_lib.list_local_devices())
 
 # Execute the model with fit_generator within the while loop utilizing the discovered GPU
-with tf.device("/device:CPU:0"):
-    history = model_InceptionV3.fit(
-        train_generator,
-        epochs=5,
-        validation_data=test_generator,
-        verbose = 1,
-        callbacks=[EarlyStopping(monitor='val_accuracy', patience = 5, restore_best_weights = True)])
+history = model_InceptionV3.fit(
+    train_generator,
+    epochs=3,
+    validation_data=test_generator,
+    verbose = 1,
+    callbacks=[EarlyStopping(monitor='val_accuracy', patience = 5, restore_best_weights = True)])
