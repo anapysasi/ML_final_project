@@ -10,9 +10,10 @@ import matplotlib.pyplot as plt
 import regex
 
 
-def train_generator_func(info=False, image=False, shear_range_val=0.2,
+def train_generator_func(path='data/Train', info=False, image=False, shear_range_val=0.2,
                          zoom_range_val=0.2, target_size1=68, target_size2=46):
     """
+    :param path: Path to retrieve the data.
     :param info: If True prints information about the generator.
     :param image: If True shows some of the images with the corresponding label
     :param shear_range_val: value for shear_range in ImageDataGenerator()
@@ -25,7 +26,7 @@ def train_generator_func(info=False, image=False, shear_range_val=0.2,
     train_data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, shear_range=shear_range_val,
                                                                            zoom_range=zoom_range_val,
                                                                            horizontal_flip=True)
-    train_generator = train_data_generator.flow_from_directory('data/Train', target_size=(target_size1, target_size2),
+    train_generator = train_data_generator.flow_from_directory(path, target_size=(target_size1, target_size2),
                                                                batch_size=32, class_mode='categorical')
     if info:
         print('The image shape of each training observation is:', train_generator.image_shape)
