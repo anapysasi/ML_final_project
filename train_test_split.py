@@ -11,7 +11,7 @@ import regex
 
 
 def train_generator_func(path='data/Train', info=False, image=False, shear_range_val=0.2,
-                         zoom_range_val=0.2, target_size1=68, target_size2=46):
+                         zoom_range_val=0.2, target_size1=68, target_size2=46, batch_size_val=32):
     """
     :param path: Path to retrieve the data.
     :param info: If True prints information about the generator.
@@ -20,6 +20,7 @@ def train_generator_func(path='data/Train', info=False, image=False, shear_range
     :param zoom_range_val: value for zoom_range in ImageDataGenerator()
     :param target_size1: first value of the tuple for target_size in ImageDataGenerator()
     :param target_size2: second value of the tuple for target_size in ImageDataGenerator()
+    :param batch_size_val: batch size in flow_from_directory()
     :return: train data generator
     """
 
@@ -27,7 +28,7 @@ def train_generator_func(path='data/Train', info=False, image=False, shear_range
                                                                            zoom_range=zoom_range_val,
                                                                            horizontal_flip=True)
     train_generator = train_data_generator.flow_from_directory(path, target_size=(target_size1, target_size2),
-                                                               batch_size=32, class_mode='categorical')
+                                                               batch_size=batch_size_val, class_mode='categorical')
     if info:
         print('The image shape of each training observation is:', train_generator.image_shape)
         print('\n We can see how:')
