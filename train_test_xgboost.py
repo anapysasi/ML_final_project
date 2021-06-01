@@ -70,13 +70,13 @@ def train_generator_func(img_size1=68, img_size_2=46, augmentation=True, reshape
     if reshaped:
         # x_train is 12834 rows of (68x46) values --> reshaped in 12834 x 3128
         # y_train is 400 rows of (68x46) values --> reshaped in 400 x 3128
-        reshaped = img_size1 * img_size_2
+        reshaped_size = img_size1 * img_size_2
 
         if not augmentation:
-            x_train = np.array(x_train).reshape(12834, reshaped)
+            x_train = np.array(x_train).reshape(12834, reshaped_size)
         else:
-            x_train = np.array(x_train).reshape(15325, reshaped)
-        x_test = np.array(x_test).reshape(400, reshaped)
+            x_train = np.array(x_train).reshape(15325, reshaped_size)
+        x_test = np.array(x_test).reshape(400, reshaped_size)
         x_train = x_train.astype('float32')
         x_test = x_test.astype('float32')
 
