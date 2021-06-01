@@ -6,15 +6,19 @@ from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings('ignore')
 
 
-def train_generator_func(img_size1=68, img_size_2=46):
+def train_generator_func(img_size1=68, img_size_2=46, augmentation=True):
     """
 
     :param img_size1: first value of the tuple to resize the image
     :param img_size_2: second value of the tuple to resize the image
+    :param augmentation: default True. Adds the images form the augmentation process to teh data.
     :return: x_train, y_train, x_test, y_test ready to use in xg_boost
     """
     train_path = glob.glob('data/Train/*/*')
     test_path = glob.glob('data/Test/Groups/*/*')
+    augm_path = None
+    if augmentation:
+        augm_path = glob.glob('data/Augmentation/*/*')
 
     def inp_process(file):
         data = []
@@ -40,6 +44,9 @@ def train_generator_func(img_size1=68, img_size_2=46):
 
     train = inp_process(train_path)
     test = inp_process(test_path)
+    augm = None
+    if augmentation:
+        augm = inp_process(augm_path)
 
     x_train = []
     y_train = []
@@ -54,11 +61,19 @@ def train_generator_func(img_size1=68, img_size_2=46):
         x_test.append(feature)
         y_test.append(label)
 
+    if augmentation is True:
+        for feature, label in augm:
+            x_train.append(feature)
+            y_train.append(label)
+
     # x_train is 12834 rows of (68x46) values --> reshaped in 12834 x 3128
     # y_train is 400 rows of (68x46) values --> reshaped in 400 x 3128
     reshaped = img_size1 * img_size_2
 
-    x_train = np.array(x_train).reshape(12834, reshaped)
+    if not augmentation:
+        x_train = np.array(x_train).reshape(12834, reshaped)
+    else:
+        x_train = np.array(x_train).reshape(15325, reshaped)
     x_test = np.array(x_test).reshape(400, reshaped)
     x_train = x_train.astype('float32')
     x_test = x_test.astype('float32')
