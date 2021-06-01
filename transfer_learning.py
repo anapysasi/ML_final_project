@@ -26,7 +26,10 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 np.random.seed(32)
 
 # Specify the base directory where images are located.
-base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
+# Mac
+# base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
+# Windows
+base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
 # Specify the traning, validation, and test dirrectories.
 train_dir = os.path.join(base_dir, 'data/Train')
 test_dir = os.path.join(base_dir, 'data/Test/Groups')
@@ -36,7 +39,7 @@ train_datagen = ImageDataGenerator(
     shear_range=0.2,
     zoom_range=0.2, # Zoom in on image by 20%
     horizontal_flip=True) # Flip image horizontally
-# Normalize the test data imagees, resize them but don't augment them
+# Normalize the test data images, resize them but don't augment them
 test_datagen = ImageDataGenerator(rescale=1./255)
 train_generator = train_datagen.flow_from_directory(
     train_dir,
@@ -81,7 +84,37 @@ print(device_lib.list_local_devices())
 # Execute the model with fit_generator within the while loop utilizing the discovered GPU
 history = model_InceptionV3.fit(
     train_generator,
-    epochs=3,
+    epochs=5,
     validation_data=test_generator,
     verbose = 1,
     callbacks=[EarlyStopping(monitor='val_accuracy', patience = 5, restore_best_weights = True)])
+
+model_InceptionV3.save("inceptionv3_transferlearning")
+
+# Create a dictionary of the model history
+history_dict = history.history
+loss_values = history_dict['loss']
+val_loss_values = history_dict['val_loss']
+acc_values = history_dict['accuracy']
+val_acc_values = history_dict['val_accuracy']
+epochs = range(1, len(history_dict['accuracy']) + 1)
+# Plot the training/validation loss
+plt.plot(epochs, loss_values, 'bo', label = 'Training loss')
+plt.plot(epochs, val_loss_values, 'b', label = 'Validation loss')
+plt.title('Training and validation loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.show()
+# Plot the training/validation accuracy
+plt.plot(epochs, acc_values, 'bo', label = 'Training accuracy')
+plt.plot(epochs, val_acc_values, 'b', label = 'Validation accuracy')
+plt.title('Training and validation accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.show()
+# Evaluate the test accuracy and test loss of the model
+test_loss, test_acc = model_InceptionV3.evaluate_generator(test_generator)
+print('Model testing accuracy/testing loss:', test_acc, " ", test_loss)
+
