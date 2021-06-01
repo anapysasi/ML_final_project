@@ -13,7 +13,6 @@ import re
 def train_generator_func(info=False, image=False, shear_range_val=0.2,
                          zoom_range_val=0.2, target_size1=68, target_size2=46):
     """
-
     :param info: If True prints information about the generator.
     :param image: If True shows some of the images with the corresponding label
     :param shear_range_val: value for shear_range in ImageDataGenerator()

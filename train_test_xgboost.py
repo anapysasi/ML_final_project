@@ -6,12 +6,13 @@ from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings('ignore')
 
 
-def train_generator_func(img_size1=68, img_size_2=46, augmentation=True):
+def train_generator_func(img_size1=68, img_size_2=46, augmentation=True, reshaped=True):
     """
 
     :param img_size1: first value of the tuple to resize the image
     :param img_size_2: second value of the tuple to resize the image
     :param augmentation: default True. Adds the images form the augmentation process to teh data.
+    :param reshaped: default True. Reshapes the data
     :return: x_train, y_train, x_test, y_test ready to use in xg_boost
     """
     train_path = glob.glob('data/Train/*/*')
@@ -66,21 +67,22 @@ def train_generator_func(img_size1=68, img_size_2=46, augmentation=True):
             x_train.append(feature)
             y_train.append(label)
 
-    # x_train is 12834 rows of (68x46) values --> reshaped in 12834 x 3128
-    # y_train is 400 rows of (68x46) values --> reshaped in 400 x 3128
-    reshaped = img_size1 * img_size_2
+    if reshaped:
+        # x_train is 12834 rows of (68x46) values --> reshaped in 12834 x 3128
+        # y_train is 400 rows of (68x46) values --> reshaped in 400 x 3128
+        reshaped = img_size1 * img_size_2
 
-    if not augmentation:
-        x_train = np.array(x_train).reshape(12834, reshaped)
-    else:
-        x_train = np.array(x_train).reshape(15325, reshaped)
-    x_test = np.array(x_test).reshape(400, reshaped)
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
+        if not augmentation:
+            x_train = np.array(x_train).reshape(12834, reshaped)
+        else:
+            x_train = np.array(x_train).reshape(15325, reshaped)
+        x_test = np.array(x_test).reshape(400, reshaped)
+        x_train = x_train.astype('float32')
+        x_test = x_test.astype('float32')
 
-    # Rescale the values to a smaller range with mean zero and unit variance.
-    scaler = StandardScaler()
-    scaler.fit(x_train)
-    x_train = scaler.transform(x_train)
-    x_test = scaler.transform(x_test)
+        # Rescale the values to a smaller range with mean zero and unit variance.
+        scaler = StandardScaler()
+        scaler.fit(x_train)
+        x_train = scaler.transform(x_train)
+        x_test = scaler.transform(x_test)
     return x_train, y_train, x_test, y_test
