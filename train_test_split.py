@@ -7,7 +7,7 @@ import glob
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-import re
+import regex
 
 
 def train_generator_func(info=False, image=False, shear_range_val=0.2,
@@ -55,10 +55,10 @@ def test_label_func():
     test_label = list()
     label = None
     for f in files:
-        photo = re.sub(r"data/Test/", "", f)
-        photo = re.findall(r"[a-zA-Z]", photo)
+        photo = regex.sub(r"data/Test/", "", f)
+        photo = regex.findall(r"[a-zA-Z]", photo)
         photo = ''.join(photo)
-        photo = re.sub(r"png", "", photo)
+        photo = regex.sub(r"png", "", photo)
         if photo == 'Apple':
             label = 0
         if photo == 'Banana':
