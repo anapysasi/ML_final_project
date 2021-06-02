@@ -1,6 +1,6 @@
 """
 This script builds an Image Recognition Transfer Learning model using tensorflow_hub. 
-It builds and saves a Vgg16 base model with a few additional top layers.
+It builds and saves a Vgg16 base model's weights (>800 MB) with a few additional top layers.
 Without a GPU, each epoch takes ~45 minutes to run.
 """
 # https://www.learndatasci.com/tutorials/hands-on-transfer-learning-keras/
