@@ -1,3 +1,13 @@
+"""
+Evaluates the different XGBoost models.
+It opens one of the saved models:
+    -xgboost_simple_model.pickle.dat
+    -xgboost_model.pickle.dat
+    -xgboost_model2.pickle.dat
+    -xgboost_model2_aug.pickle.dat
+and fits the data (original or augmented).
+It returns the Classification report, the Confusion matrix for the test and train data & the accuracy score of the model
+"""
 from sklearn import metrics
 import pickle
 from train_test_cv2 import train_generator_func

@@ -1,3 +1,8 @@
+"""
+Creates a more complex XGBoost model than the one in xgboost_simple_model.pu, by switching some of the parameters.
+It uses `RandomizedSearchCV()` to decide what parameters fit the data best.
+It can use either the original data or the augmented data depending on the parameter `augmentation`. The default is True.
+"""
 import xgboost as xgb
 import pickle
 import warnings

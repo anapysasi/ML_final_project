@@ -1,3 +1,8 @@
+"""
+File that creates and saves a simple XGBoost model for the data.
+All the parameters for the XGBoost are the default ones.
+The model created is saved as xgboost_simple_model.pickle.dat.
+"""
 import xgboost as xgb
 import pickle
 import warnings
