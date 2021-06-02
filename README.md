@@ -60,11 +60,11 @@ It saves the new imgages in '/data/augmentation/'. If plot=True it reurns an exa
 
 ## CNN
 
-#### File: [`cnn_complex_model.py`](https://github.com/FernandoForeroAcosta/ML_final_project/blob/main/cnn_complex_model.py)
+#### File: [`cnn_complex_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/cnn_complex_model.py)
 
 File that creates a more complex model by adding 28 layers to the CNN including Conv2D, LeakyRelu, Dropout and MaxPooling. The image size in this case is 256x256 and we tested the model with 3 epochs and 3 steps per epoch. 
 
-#### File: [`cnn_final_model.py`](https://github.com/FernandoForeroAcosta/ML_final_project/blob/main/cnn_final_model.py)
+#### File: [`cnn_final_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/cnn_final_model.py)
 
 This file requires TENSFORFLOW 2.1.0 version
 
@@ -146,7 +146,7 @@ Accuracy score: 0.5775
 [[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
  [ 0.41 &nbsp; 0.52 &nbsp; 0.06 &nbsp; 0.01 &nbsp; ]<br>
  [ 0.33 &nbsp; 0.03 &nbsp; 0.64 &nbsp; 0. &ensp; &nbsp; ]<br>
- [ 0.5 &ebsp; 0.04 &nbsp; 0.03 &nbsp; 0.43 ]]<br>
+ [ 0.5 &emsp; 0.04 &nbsp; 0.03 &nbsp; 0.43 ]]<br>
  
  Accuracy score: 0.6475
 
@@ -164,8 +164,8 @@ RandomizedSearchCV() based on the results of the previous model + image augmenta
 - Number of Trees: 800
 
 [[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
- [ 0.41 &nbsp; 0.56 &nbsp; 0.03 &nbsp; 0. &ebsp; &nbsp; ]<br>
- [ 0.29 &nbsp; 0.08 &nbsp; 0.63 &nbsp; 0. &ensp; &nbsp; ]<br>
+ [ 0.41 &nbsp; 0.56 &nbsp; 0.03 &nbsp; 0. &emsp; &nbsp; ]<br>
+ [ 0.29 &nbsp; 0.08 &nbsp; 0.63 &nbsp; 0. &emsp; &nbsp; ]<br>
  [ 0.49 &nbsp; 0.02 &nbsp; 0.03 &nbsp; 0.46 ]]<br>
  
  Accuracy score: 0.6625
@@ -173,6 +173,19 @@ RandomizedSearchCV() based on the results of the previous model + image augmenta
 ---
 
 ## ResNet50
+
+#### File: [`ResNet-Final.py`](https://github.com/anapysasi/ML_final_project/blob/main/ResNet-Final.py)
+
+File that creates and contains 3 ResNet models and their evaluation metrics based on their performance on our Train and Validation Dataset. 
+
+#### Model 1: ['ResNet50Base.h5] - Trained on ImageNet (Weight='ImageNet'), Pooling = Max - run for 10 Epochs, 100 Steps per Epoch
+  Accuracy score: 0.2525
+
+#### Model 2: ['ResNet50Base.h5] - Trained on Train Dataset (Weights = None), Pooling = Max - run for 10 Epochs, 50 Steps per Epoch
+   Accuracy score: 0.23
+   
+#### Model 3: ['ResNet50Base.h5] - Trained on Train Dataset (Weights = None), Pooling = Max - run for 20 Epochs, 50 Steps per Epoch
+  Accuracy score: 0.265
 
 ---
 
