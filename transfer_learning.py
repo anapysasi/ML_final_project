@@ -1,5 +1,7 @@
 """
-This script builds an Image Recognition Transfer Learning model using tensorflow_hub
+This script builds an Image Recognition Transfer Learning model using tensorflow_hub. 
+It builds and saves a InceptionV3 base model (>150 MB) with a few additional top layers.
+Without a GPU, each epoch takes ~1.5 hours to run.
 """
 
 import os
@@ -26,20 +28,23 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 np.random.seed(32)
 
 
-# Specify the base directory where images are located.
+# Specify the base directory where images are located -  use the variable that corresponds to your local machine
 # Mac
 base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
 # Windows
 # base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
+
 # Specify the traning, validation, and test dirrectories.
 train_dir = os.path.join(base_dir, 'data/Train')
 test_dir = os.path.join(base_dir, 'data/Test/Groups')
+
 # Normalize the pixels in the train data images, resize and augment the data.
 train_datagen = ImageDataGenerator(
     rescale=1./255,# The image augmentaion function in Keras
     shear_range=0.2,
     zoom_range=0.2, # Zoom in on image by 20%
     horizontal_flip=True) # Flip image horizontally
+
 # Normalize the test data images, resize them but don't augment them
 test_datagen = ImageDataGenerator(rescale=1./255)
 train_generator = train_datagen.flow_from_directory(
@@ -90,6 +95,7 @@ history = model_InceptionV3.fit(
     verbose = 1,
     callbacks=[EarlyStopping(monitor='val_accuracy', patience = 5, restore_best_weights = True)])
 
+# Save model after running it so that you don't have to rerun it and can load it easily later
 model_InceptionV3.save("inceptionv3_transferlearning_v2")
 
 # Create a dictionary of the model history
@@ -99,6 +105,7 @@ val_loss_values = history_dict['val_loss']
 acc_values = history_dict['accuracy']
 val_acc_values = history_dict['val_accuracy']
 epochs = range(1, len(history_dict['accuracy']) + 1)
+
 # Plot the training/validation loss
 plt.plot(epochs, loss_values, 'bo', label = 'Training loss')
 plt.plot(epochs, val_loss_values, 'b', label = 'Validation loss')
@@ -107,6 +114,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
 plt.show()
+
 # Plot the training/validation accuracy
 plt.plot(epochs, acc_values, 'bo', label = 'Training accuracy')
 plt.plot(epochs, val_acc_values, 'b', label = 'Validation accuracy')
@@ -115,6 +123,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
+
 # Evaluate the test accuracy and test loss of the model
 test_loss, test_acc = model_InceptionV3.evaluate_generator(test_generator)
 print('Model testing accuracy/testing loss:', test_acc, " ", test_loss)
