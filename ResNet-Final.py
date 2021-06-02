@@ -1,9 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[1]:
-
-
+# Import Packages
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import pandas as pd
@@ -27,51 +23,29 @@ import cv2
 import warnings
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-warnings.filterwarnings('ignore')
-
-
-# In[42]:
-
-
 from train_test_split import test_label_func
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+warnings.filterwarnings('ignore')
 
-
-# In[2]:
-
-
-#Setting Directory
+# Setting Directory
 base_dir = '/Users/SahilSachdev/Downloads/MLPA-Final/'
 train_dir = os.path.join(base_dir, 'data/Train')
 validation_dir = os.path.join(base_dir, 'data/Test/test/Groups')
-
-
-# In[3]:
-
 
 # Add our data-augmentation parameters to ImageDataGenerator
 train_datagen = ImageDataGenerator(rescale = 1./255., rotation_range = 40, width_shift_range = 0.2, height_shift_range = 0.2,shear_range = 0.2, zoom_range = 0.2, horizontal_flip = True)
 test_datagen = ImageDataGenerator(rescale = 1.0/255)
 
-
-# In[4]:
-
-
 # Creating Train and Test Generators
 train_generator = train_datagen.flow_from_directory(train_dir, batch_size = 32, class_mode = 'categorical', target_size = (224, 224))
 validation_generator = test_datagen.flow_from_directory(validation_dir, batch_size = 32, class_mode = 'categorical', target_size = (224, 224))
 
-
-# In[5]:
-
-
+# Printing Image Shape
 print(train_generator.image_shape)
 
-
-# In[6]:
-
+# Creating Train Generator UDF
 
 def train_generator_func(img_size1=224, img_size_2=224):
     """
@@ -124,16 +98,20 @@ def train_generator_func(img_size1=224, img_size_2=224):
     return x_train, y_train, x_test, y_test
 
 
-## Model 1 - Steps:100, Epochs:10 (ImageNet)
 
-# In[7]:
+## Model 1 - Steps:100, Epochs:10 (ImageNet - Pre-Trained)
 
-
+# Import Packages
 from tensorflow.keras.applications import ResNet50
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Flatten, GlobalAveragePooling2D
+from sklearn.metrics import accuracy_score
+from keras.applications.resnet50 import ResNet50
+from keras.preprocessing import image
+from keras.applications.resnet50 import preprocess_input
+from keras import applications
 
-
+# Creating ResNet Model
 base_model = ResNet50(input_shape=(224, 224,3), include_top=False, weights="imagenet")
 
 for layer in base_model.layers:
@@ -143,37 +121,19 @@ base_model = Sequential()
 base_model.add(ResNet50(include_top=False, weights='imagenet', pooling='max'))
 base_model.add(Dense(4, activation='sigmoid'))
 
-
-# In[8]:
-
-
+# Compiling Model
 base_model.compile(optimizer = tf.keras.optimizers.SGD(lr=0.0001), loss = 'binary_crossentropy', metrics = ['acc'])
 
-
-# In[9]:
-
-
+# Fitting Model
 resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 10)
 
-
-# In[10]:
-
-
+# Saving ResNet Model 1
 base_model.save('ResNet50Base.h5')
 print("Saved model")
 
-
-# In[155]:
-
-
+# Loading ResNet Model 1
 model = load_model("ResNet50Base.h5")
 print('\n Model download successfully')
-
-
-# In[156]:
-
-
-from sklearn.metrics import accuracy_score
 
 # Create a dictionary of the model history
 history_dict = resnet_history.history
@@ -182,10 +142,6 @@ val_loss_values = history_dict['val_loss']
 acc_values = history_dict['acc']
 val_acc_values = history_dict['val_acc']
 epochs = range(1, len(history_dict['acc']) + 1)
-
-
-# In[157]:
-
 
 # Plot the training/validation loss
 plt.plot(epochs, loss_values, 'bo', label = 'Training loss')
@@ -196,10 +152,6 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
-
-# In[158]:
-
-
 # Plot the training/validation accuracy
 plt.plot(epochs, acc_values, 'bo', label = 'Training accuracy')
 plt.plot(epochs, val_acc_values, 'b', label = 'Validation accuracy')
@@ -209,33 +161,16 @@ plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
 
-
-# In[159]:
-
-
 # Evaluate the test accuracy and test loss of the model
 test_loss, test_acc = base_model.evaluate_generator(validation_generator)
 print('Model testing accuracy/testing loss:', test_acc, " ", test_loss)
-
-
-# In[66]:
-
-
-from keras.applications.resnet50 import ResNet50
-from keras.preprocessing import image
-from keras.applications.resnet50 import preprocess_input
-from keras import applications
-
-
-# In[149]:
-
 
 # Test Data Directory and Looping Over Images
 test_img_dir = r"/Users/SahilSachdev/Downloads/MLPA-Final/data/Test/test/" 
 data_path = os.path.join(test_img_dir, '*g')
 files = glob.glob(data_path)
 
-# Run prediction and add to results 
+# Run prediction and add predicted labels to Array
 data = []
 results = []
 
@@ -250,10 +185,7 @@ for f1 in files:
 
 print(results)
 
-
-# In[160]:
-
-
+# Run Prediction on Validation Generator and Calculating Accuracy Results and Confusion Matrix
 true_classes = validation_generator.classes
 class_indices = train_generator.class_indices
 class_indices = dict((v,k) for k,v in class_indices.items())
@@ -276,28 +208,22 @@ print(metrics.classification_report(true_classes, resnet_pred_classes))
 print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(true_classes, resnet_pred_classes, normalize='true').round(3))
 
-
-## Model 2 - Steps: 50; Epochs: 10 (None)
-
-# In[14]:
+# Printing Model Summary
+base_model.summary()
 
 
-# Add our data-augmentation parameters to ImageDataGenerator
+
+## Model 2 - Steps: 50; Epochs: 10 (No Pre-Trained Weights)
+
+# Create Train and Test DataGen using ImageDataGenerator
 train_datagen = ImageDataGenerator(rescale = 1./255., rotation_range = 40, width_shift_range = 0.2, height_shift_range = 0.2,shear_range = 0.2, zoom_range = 0.2, horizontal_flip = True)
 test_datagen = ImageDataGenerator(rescale = 1.0/255)
-
-
-# In[15]:
-
 
 # Creating Train and Test Generators
 train_generator = train_datagen.flow_from_directory(train_dir, batch_size = 32, class_mode = 'categorical', target_size = (224, 224))
 validation_generator = test_datagen.flow_from_directory(validation_dir, batch_size = 32, class_mode = 'categorical', target_size = (224, 224))
 
-
-# In[53]:
-
-
+# Creating Train Generator UDF
 def train_generator_func(img_size1=224, img_size_2=224):
     """
 
@@ -348,14 +274,13 @@ def train_generator_func(img_size1=224, img_size_2=224):
 
     return x_train, y_train, x_test, y_test
 
-
-# In[138]:
-
-
+# Importing Packages
 from tensorflow.keras.applications import ResNet50
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Flatten, GlobalAveragePooling2D
+from sklearn.metrics import accuracy_score
 
+# Creating ResNet50 Model 2 (No Pre-Training - 10 Epochs)
 base2_model = ResNet50(input_shape=(224, 224,3), include_top=False, weights=None)
 
 for layer in base2_model.layers:
@@ -365,37 +290,19 @@ base2_model = Sequential()
 base2_model.add(ResNet50(include_top=False, weights=None, pooling='max'))
 base2_model.add(Dense(4, activation='sigmoid'))
 
-
-# In[139]:
-
-
+# Compiling Model
 base2_model.compile(optimizer = tf.keras.optimizers.SGD(lr=0.0001), loss = 'binary_crossentropy', metrics = ['acc'])
 
-
-# In[140]:
-
-
+# Fitting Model
 resnet_history2 = base2_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 50, epochs = 10)
 
-
-# In[141]:
-
-
+# Saving ResNet Model 2
 base2_model.save('ResNet50-Try2-2.h5')
 print("Saved model")
 
-
-# In[ ]:
-
-
+# Loading ResNet Model 2
 resnet_history2 = load_model('ResNet50-Try2-2.h5')
 print("Loaded model")
-
-
-# In[143]:
-
-
-from sklearn.metrics import accuracy_score
 
 # Create a dictionary of the model history
 history_dict2 = resnet_history2.history
@@ -404,10 +311,6 @@ val_loss_values2 = history_dict2['val_loss']
 acc_values2 = history_dict2['acc']
 val_acc_values2 = history_dict2['val_acc']
 epochs2 = range(1, len(history_dict2['acc']) + 1)
-
-
-# In[144]:
-
 
 # Plot the training/validation loss
 plt.plot(epochs2, loss_values2, 'bo', label = 'Training loss')
@@ -418,10 +321,6 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
-
-# In[145]:
-
-
 # Plot the training/validation accuracy
 plt.plot(epochs2, acc_values2, 'bo', label = 'Training accuracy')
 plt.plot(epochs2, val_acc_values2, 'b', label = 'Validation accuracy')
@@ -431,24 +330,16 @@ plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
 
-
-# In[146]:
-
-
 # Evaluate the test accuracy and test loss of the model
 test_loss2, test_acc2 = base2_model.evaluate_generator(validation_generator)
 print('Model testing accuracy/testing loss:', test_acc2, " ", test_loss2)
-
-
-# In[147]:
-
 
 # Test Data Directory and Looping Over Images
 test_img_dir = r"/Users/SahilSachdev/Downloads/MLPA-Final/data/Test/test/Groups/*" 
 data_path = os.path.join(test_img_dir, '*g')
 files = glob.glob(data_path)
 
-# Run prediction and add to results 
+# Run prediction and add predicted labels to Array
 data = []
 results = []
 
@@ -463,10 +354,7 @@ for f1 in files:
 
 print(results)
 
-
-# In[153]:
-
-
+# Run Prediction on Validation Generator and Calculating Accuracy Results and Confusion Matrix
 true_classes = validation_generator.classes
 class_indices = train_generator.class_indices
 class_indices = dict((v,k) for k,v in class_indices.items())
@@ -489,12 +377,14 @@ print(metrics.classification_report(true_classes, resnet_pred_classes))
 print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(true_classes, resnet_pred_classes, normalize='true').round(3))
 
-
-## Model 3 - Steps:100; Epochs:20 (None)
-
-# In[123]:
+# Printing Model Summary
+base2_model.summary()
 
 
+
+## Model 3 - Steps: 50; Epochs: 20 (No Pre-Trained Weights)
+
+# Creating Train Generator UDF
 def train_generator_func(img_size1=225, img_size_2=225):
     """
 
@@ -547,20 +437,13 @@ def train_generator_func(img_size1=225, img_size_2=225):
 
     return x_train, y_train, x_test, y_test
 
-
-# In[124]:
-
-
-x_train, y_train, x_test, y_test = train_generator_func()
-
-
-# In[128]:
-
-
+# Importing Packages
 from tensorflow.keras.applications import ResNet50
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout, Activation
+from sklearn.metrics import accuracy_score
 
+# Creating ResNet Model 3 - (No Pre-Training - 20 Epochs)
 base3_model = ResNet50(input_shape=(224, 224,3), include_top=False, weights=None)
 
 for layer in base2_model.layers:
@@ -571,37 +454,19 @@ base3_model.add(ResNet50(include_top=False, weights=None, pooling='max'))
 base3_model.add(Dense(4, activation='sigmoid'))
 base3_model.add(Activation("relu"))
 
-
-# In[129]:
-
-
+# Compiling Model
 base3_model.compile(optimizer = tf.keras.optimizers.SGD(lr=0.0001), loss = 'binary_crossentropy', metrics = ['acc'])
 
-
-# In[130]:
-
-
+# Fitting Model
 resnet_history3 = base3_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 50, epochs = 20)
 
-
-# In[131]:
-
-
+# Saving ResNet Model 3
 base3_model.save('ResNet50-Try3.h5')
 print("Saved model")
 
-
-# In[165]:
-
-
+# Loading ResNet Model 3
 resnet_history3 = load_model('ResNet50-Try3.h5')
 print("Loaded model")
-
-
-# In[133]:
-
-
-from sklearn.metrics import accuracy_score
 
 # Create a dictionary of the model history
 history_dict3 = resnet_history3.history
@@ -610,10 +475,6 @@ val_loss_values3 = history_dict3['val_loss']
 acc_values3 = history_dict3['acc']
 val_acc_values3 = history_dict3['val_acc']
 epochs3 = range(1, len(history_dict3['acc']) + 1)
-
-
-# In[134]:
-
 
 # Plot the training/validation loss
 plt.plot(epochs3, loss_values3, 'bo', label = 'Training loss')
@@ -624,10 +485,6 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
-
-# In[135]:
-
-
 # Plot the training/validation accuracy
 plt.plot(epochs3, acc_values3, 'bo', label = 'Training accuracy')
 plt.plot(epochs3, val_acc_values3, 'b', label = 'Validation accuracy')
@@ -637,24 +494,16 @@ plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
 
-
-# In[136]:
-
-
 # Evaluate the test accuracy and test loss of the model
 test_loss3, test_acc3 = base3_model.evaluate_generator(validation_generator)
 print('Model testing accuracy/testing loss:', test_acc3, " ", test_loss3)
-
-
-# In[166]:
-
 
 # Test Data Directory and Looping Over Images
 test_img_dir = r"/Users/SahilSachdev/Downloads/MLPA-Final/data/Test/test/Groups/*" 
 data_path = os.path.join(test_img_dir, '*g')
 files = glob.glob(data_path)
 
-# Run prediction and add to results 
+# Run prediction and add predicted labels to Array
 data = []
 results = []
 
@@ -669,10 +518,7 @@ for f1 in files:
 
 print(results)
 
-
-# In[142]:
-
-
+# Run Prediction on Validation Generator and Calculating Accuracy Results and Confusion Matrix
 true_classes = validation_generator.classes
 class_indices = train_generator.class_indices
 class_indices = dict((v,k) for k,v in class_indices.items())
@@ -695,21 +541,5 @@ print(metrics.classification_report(true_classes, resnet_pred_classes))
 print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(true_classes, resnet_pred_classes, normalize='true').round(3))
 
-
-# In[162]:
-
-
+# Printing Model Summary
 base3_model.summary()
-
-
-# In[163]:
-
-
-base2_model.summary()
-
-
-# In[164]:
-
-
-base_model.summary()
-
