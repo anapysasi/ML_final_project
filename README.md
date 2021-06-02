@@ -167,9 +167,9 @@ File that creates and saves an InceptionV3 transfer learning model for the data.
 
 Loads and evaluates an InveptionV3 model. It prints the Accuracy Score, Classification report, the Confusion matrix for the test and train data for the model that is loaded.
 
-[[ 0.37 &nbsp; 0.00 &nbsp; 0.63 &nbsp; 0.00 &nbsp; ]<br>
- [ 0.23 &nbsp; 0.00 &nbsp; 0.77 &nbsp; 0.02 &nbsp; ]<br>
- [ 0.25 &nbsp; 0.00 &nbsp; 0.75 &nbsp; 0.00 &nbsp; ]<br>
+[[ 0.37 &nbsp; 0.00 &nbsp; 0.63 &nbsp; 0.00 &nbsp;]<br>
+ [ 0.23 &nbsp; 0.00 &nbsp; 0.77 &nbsp; 0.02 &nbsp;]<br>
+ [ 0.25 &nbsp; 0.00 &nbsp; 0.75 &nbsp; 0.00 &nbsp;]<br>
  [ 0.41 &nbsp; 0.00 &nbsp; 0.59 &nbsp; 0.00 ]]<br>
 
  Accuracy score: 0.2800
@@ -187,6 +187,6 @@ Loads and evaluates the VGG16 model weights. It prints the Accuracy Score, Class
 [[ 0.99 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.01 &nbsp;]<br>
  [ 0.00 &nbsp; 1.00 &nbsp; 0.00 &nbsp; 0.00 &nbsp;]<br>
  [ 0.00 &nbsp; 0.00 &nbsp; 1.00 &nbsp; 0.00 &nbsp;]<br>
- [ 0.01 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.99]]<br>
+ [ 0.01 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.99 ]]<br>
 
  Accuracy score: 0.9950
