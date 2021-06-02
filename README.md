@@ -14,7 +14,7 @@ In this project we aim to identify different fruits: apples, bananas, oranges an
 
 Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo/fruit-recognition). We exported the Folders: `Apple`, `Banana`, `Orange` and `Tomato`. 
 
-| <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="400" height="600" /> | 
+| <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="500" height="600" /> | 
 |:--:| 
 | *Example of  the data with the different labels* |
 
