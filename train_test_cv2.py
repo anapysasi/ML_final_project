@@ -1,7 +1,15 @@
+"""
+Returns the x_train, y_train, x_test and y_test of the data.
+With all the default parameters the train_generator_func() creates the right input for the XGBoost algorithm.
+It uses cv2.IMREAD_GRAYSCALE to open the images.
+It resizes the images by default to 68x46.
+By default it reshapes the images and normalizes them. This can be turned off.
+"""
 import numpy as np
 import glob
 import cv2
 import warnings
+import platform
 from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings('ignore')
 
@@ -11,15 +19,21 @@ def train_generator_func(img_size1=68, img_size_2=46, augmentation=True, reshape
 
     :param img_size1: first value of the tuple to resize the image
     :param img_size_2: second value of the tuple to resize the image
-    :param augmentation: default True. Adds the images form the augmentation process to teh data.
+    :param augmentation: default True. Adds the images form the augmentation process to the data.
     :param reshaped: default True. Reshapes the data
     :return: x_train, y_train, x_test, y_test ready to use in xg_boost
     """
-    train_path = glob.glob('data/Train/*/*')
-    test_path = glob.glob('data/Test/Groups/*/*')
     augm_path = None
-    if augmentation:
-        augm_path = glob.glob('data/Augmentation/*/*')
+    if platform.system() == "Windows":
+        train_path = glob.glob('data\\Train\\*\\*')
+        test_path = glob.glob('data\\Test\\Groups\\*\\*')
+        if augmentation:
+            augm_path = glob.glob('data\\Augmentation\\*\\*')
+    else:
+        train_path = glob.glob('data/Train/*/*')
+        test_path = glob.glob('data/Test/Groups/*/*')
+        if augmentation:
+            augm_path = glob.glob('data/Augmentation/*/*')
 
     def inp_process(file):
         data = []
@@ -68,7 +82,8 @@ def train_generator_func(img_size1=68, img_size_2=46, augmentation=True, reshape
             y_train.append(label)
 
     if reshaped:
-        # x_train is 12834 rows of (68x46) values --> reshaped in 12834 x 3128
+        # x_train (original) is 12834 rows of (68x46) values --> reshaped in 12834 x 3128
+        # x_train (augmented) is 15325 rows of (68x46) values --> reshaped in 15325 x 3128
         # y_train is 400 rows of (68x46) values --> reshaped in 400 x 3128
         reshaped_size = img_size1 * img_size_2
 

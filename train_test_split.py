@@ -1,5 +1,7 @@
 """
-This script assigns our train and test data to variables
+This script has a function [train_generator_func()] that creates a generator for the Train data. The path can be changed.
+test_label_func() returns a vector with the files paths (files), the labels of the test files (test_label)
+and a vector with specifically the  fruit (test_label_fruit)
 """
 
 import os
@@ -7,6 +9,7 @@ import glob
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+import platform
 import regex
 
 
@@ -23,6 +26,14 @@ def train_generator_func(path='data/Train', info=False, image=False, shear_range
     :param batch_size_val: batch size in flow_from_directory()
     :return: train data generator
     """
+
+    if platform.system() == 'Windows':
+        if path == 'data/Train':
+            path = 'data\\Train'
+        else:
+            pass
+    else:
+        pass
 
     train_data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255, shear_range=shear_range_val,
                                                                            zoom_range=zoom_range_val,
@@ -48,19 +59,28 @@ def train_generator_func(path='data/Train', info=False, image=False, shear_range
 
 def test_label_func():
     """
-    :return: returns a vector with the labels of the test files
+    :return: returns a vector with the files paths (files), the labels of the test files (test_label)
+             and a vector with specifically the  fruit (test_label_fruit)
     """
-    data_path = os.path.join('data/Test', '*g')
+    if platform.system() == 'Windows':
+        data_path = os.path.join('data\\Test', '*g')
+    else:
+        data_path = os.path.join('data/Test', '*g')
+
     files = glob.glob(data_path)
 
     test_label_fruit = list()
     test_label = list()
     label = None
     for f in files:
-        photo = regex.sub(r"data/Test/", "", f)
-        photo = regex.findall(r"[a-zA-Z]", photo)
+        if platform.system() == 'Windows':
+            photo = regex.sub(r'data\\Test\\', '', f)
+        else:
+            photo = regex.sub(r'data/Test/', '', f)
+
+        photo = regex.findall(r'[a-zA-Z]', photo)
         photo = ''.join(photo)
-        photo = regex.sub(r"png", "", photo)
+        photo = regex.sub(r'png', '', photo)
         if photo == 'Apple':
             label = 0
         if photo == 'Banana':
