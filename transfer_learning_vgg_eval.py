@@ -1,3 +1,9 @@
+"""
+This script loads an already built Image Recognition Transfer Learning model.
+It uses the loaded VGG16 model to check how accurate it is on test data.
+VGG16 does not use any Batch Normalization, so it does not run into any issues.
+"""
+
 import os
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
@@ -8,7 +14,7 @@ from sklearn import metrics
 from keras.layers import Dense, Dropout, Flatten
 from keras.models import Model
 
-print("hello")
+# Set parameters used in creating the train, test, validation generators
 BATCH_SIZE = 64
 input_shape = (224, 224, 3)
 n_classes=4
@@ -24,9 +30,14 @@ train_generator = ImageDataGenerator(rotation_range=90,
 
 test_generator = ImageDataGenerator(preprocessing_function=preprocess_input) # VGG16 preprocessing
 
+# Choose your base dir depending on your OS
+# Mac
 base_dir = Path('/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project')
+
+# Windows
 # base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
 
+# Locate Train & Test datasets
 train_data_dir = base_dir/'data/Train'
 test_data_dir = base_dir/'data/Test/Groups'
 
@@ -59,12 +70,12 @@ testgen = test_generator.flow_from_directory(test_data_dir,
                                              shuffle=False,
                                              seed=42)
 
-
-# vgg_model = create_model(input_shape, n_classes, fine_tune=0)
+# Create an instance of a VGG16 model that you can load the pre-saved weights to, without re-fitting the model
 conv_base = VGG16(include_top=False,
                       weights='imagenet',
                       input_shape=input_shape)
 
+# Replicating the exact model on which the weights are saved
 top_model = conv_base.output
 top_model = Flatten(name="flatten")(top_model)
 top_model = Dense(4096, activation='relu')(top_model)
@@ -88,6 +99,7 @@ vgg_pred_classes = np.argmax(vgg_preds, axis=1)
 vgg_acc = accuracy_score(true_classes, vgg_pred_classes)
 print("VGG16 Model Accuracy without Fine-Tuning: {:.2f}%".format(vgg_acc * 100))
 
+# Eyeball test to see how our model is doing
 print(true_classes)
 print(vgg_pred_classes)
 
