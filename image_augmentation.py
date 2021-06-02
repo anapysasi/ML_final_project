@@ -13,13 +13,13 @@ import warnings
 import numpy as np
 import tensorflow as tf
 import glob
+import platform
 warnings.filterwarnings('ignore')
 
 
 def img_augmentation(save_img=True, plot=False, augmentation_path='data/Augmentation/', percentage=0.2):
     """
-
-    :param save_img: Default true. Saves the images to the augmentation_path.
+    :param save_img: Default true. Saves the images to the augmentation_path. The path needs to end in / (if Windows \\)
     :param plot: Default False. If True it shows an example of the transformation.
     :param augmentation_path: Only needed if save_img=True. Path where the images are going to be saved.
     :param percentage: Default 0.2. Number from (0,1] that corresponds to the percentage of images we want to create.
@@ -29,8 +29,15 @@ def img_augmentation(save_img=True, plot=False, augmentation_path='data/Augmenta
     items = ['Apple', 'Banana', 'Orange', 'Tomato']
 
     for fruit in items:
-        train_path = glob.glob('data/Train/' + fruit + '/*')
-        augm_path = augmentation_path + fruit + '/'
+        if platform.system() == "Windows":
+            train_path = glob.glob('data\\Train\\' + fruit + '\\*')
+            if augmentation_path == 'data/Augmentation/':
+                augm_path = 'data\\Augmentation\\' + fruit + '\\'
+            else:
+                augm_path = augmentation_path + fruit + '\\'
+        else:
+            train_path = glob.glob('data/Train/' + fruit + '/*')
+            augm_path = augmentation_path + fruit + '/'
 
         for f in train_path[0:int(percentage * len(train_path))]:
             datagen = tf.keras.preprocessing.image.ImageDataGenerator(width_shift_range=[-50, 50],
