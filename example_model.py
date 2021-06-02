@@ -4,11 +4,11 @@ from train_test_split import train_generator_func
 from train_test_split import test_label_func
 from sklearn.metrics import accuracy_score
 
-train_generator = train_generator_func(info=True, )
+train_generator = train_generator_func(info=True, target_size1= 256, target_size2= 256)
 files, test_label, test_label_fruit = test_label_func()
 
 image_classifier = tf.keras.Sequential()
-image_classifier.add(tf.keras.layers.Conv2D(filters=32, kernel_size=(3, 3),
+image_classifier.add(tf.keras.layers.Conv2D(filters=16, kernel_size=(3, 3),
                                             input_shape=train_generator.image_shape, activation='relu'))
 image_classifier.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
 image_classifier.add(tf.keras.layers.Conv2D(filters=64, kernel_size=(3, 3), activation='relu'))
@@ -30,6 +30,6 @@ for f1 in files:
     result = image_classifier.predict(img)
     r = np.argmax(result, axis=1)
     results.append(r)
-
-accuracy = accuracy_score(results, test_label)
-print('\n\nThe accuracy score is:', accuracy)
+print(test_label)
+#accuracy = accuracy_score(results, test_label)
+#print('\n\nThe accuracy score is:', accuracy)
