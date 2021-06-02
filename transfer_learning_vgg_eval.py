@@ -91,6 +91,9 @@ print("VGG16 Model Accuracy without Fine-Tuning: {:.2f}%".format(vgg_acc * 100))
 print(true_classes)
 print(vgg_pred_classes)
 
+accuracy = accuracy_score(true_classes, vgg_pred_classes)
+print('\n\nThe accuracy score is:', accuracy)
+
 # Summarize the fit of the model on the test data
 print('\n Classification report of the test data: \n')
 print(metrics.classification_report(true_classes, vgg_pred_classes))

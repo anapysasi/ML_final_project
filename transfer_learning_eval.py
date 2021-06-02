@@ -56,7 +56,7 @@ print(augment_generator.image_shape)
 
 files, test_label, test_label_fruit = test_label_func()
 
-model = load_model("inceptionv3_transferlearning_v2")
+model = load_model("inceptionv3_transferlearning")
 print('\n Model download successfully')
 
 print('\n The final model is: \n', model)
@@ -79,9 +79,9 @@ accuracy = accuracy_score(test_label, results)
 print('\n\nThe accuracy score is:', accuracy)
 
 # Summarize the fit of the model on the train data
-print('\n Classification report of the train data: \n')
+print('\n Classification report of the test data: \n')
 print(metrics.classification_report(test_label, results))
-print('\n Confusion matrix of the train data: \n')
+print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(test_label, results, normalize='true').round(3))
 
 
