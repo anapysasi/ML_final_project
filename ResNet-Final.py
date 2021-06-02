@@ -124,7 +124,7 @@ def train_generator_func(img_size1=224, img_size_2=224):
     return x_train, y_train, x_test, y_test
 
 
-# # Model 1 - Steps:100, Epochs:10 (ImageNet)
+## Model 1 - Steps:100, Epochs:10 (ImageNet)
 
 # In[7]:
 
@@ -277,13 +277,7 @@ print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(true_classes, resnet_pred_classes, normalize='true').round(3))
 
 
-# In[ ]:
-
-
-
-
-
-# # Model 2 - Steps: 50; Epochs: 10 (None)
+## Model 2 - Steps: 50; Epochs: 10 (None)
 
 # In[14]:
 
@@ -496,13 +490,7 @@ print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(true_classes, resnet_pred_classes, normalize='true').round(3))
 
 
-# # Model 3 - Steps:100; Epochs:20 (None)
-
-# In[106]:
-
-
-import pickle
-
+## Model 3 - Steps:100; Epochs:20 (None)
 
 # In[123]:
 
@@ -724,10 +712,4 @@ base2_model.summary()
 
 
 base_model.summary()
-
-
-# In[ ]:
-
-
-
 
