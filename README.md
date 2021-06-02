@@ -60,6 +60,17 @@ It saves the new imgages in '/data/augmentation/'. If plot=True it reurns an exa
 
 ## CNN
 
+#### File: [`cnn_complex_model.py`](https://github.com/FernandoForeroAcosta/ML_final_project/blob/main/cnn_complex_model.py)
+
+File that creates a more complex model by adding 28 layers to the CNN including Conv2D, LeakyRelu, Dropout and MaxPooling. The image size in this case is 256x256 and we tested the model with 3 epochs and 3 steps per epoch. 
+
+#### File: [`cnn_final_model.py`](https://github.com/FernandoForeroAcosta/ML_final_project/blob/main/cnn_final_model.py)
+
+This file requires TENSFORFLOW 2.1.0 version
+
+File that creates a model with the best results using CNN with Keras. Adding 8 layers to the CNN including Conv2D, MaxPooling, Flatten and Desnse layes.
+
+Accuracy score: 0.701
 
 ---
 
