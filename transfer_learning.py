@@ -1,6 +1,6 @@
 """
 This script builds an Image Recognition Transfer Learning model using tensorflow_hub. 
-It builds and saves a InceptionV3 base model with a few additional top layers.
+It builds and saves a InceptionV3 base model (>150 MB) with a few additional top layers.
 Without a GPU, each epoch takes ~1.5 hours to run.
 """
 
