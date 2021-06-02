@@ -46,16 +46,24 @@ The default of the function is to __reshape__ the data and __normailize__ it wit
 
 By default it takes all the images available, including the ones form the data augmentation. If you set `augmentation=False` it would only use the origianl images to train the model.
 
+### File: [`image_augmentation.py`](https://github.com/anapysasi/ML_final_project/blob/main/image_augmentation.py)
+
 
 ## XGBoost
 
 #### File: [`xgboost_simple_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_simple_model.py)
 
-File that creates and saves a simple XGBoost model for the data. All the parameters are the default ones.
+File that creates and saves a simple XGBoost model for the data. All the parameters are the default ones. The model is saves as [`xgboost_simple_model.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_simple_model.pickle.dat).
 
 #### File: [`xgboost_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model.py)
 
+Creates a more complex XGBoost model, by switching some of the parameters. It uses `RandomizedSearchCV()` to decide what parameters fit the data best. It can use either the original data or the augmented data depending on the parameter `augmentation`, teh dafault is `True`.
+
 #### File: [`xgboost_eval.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_eval.py)
+
+Evaluates the different XGBoost models. It opens one of the saved models (`xgboost_simple_model.pickle.dat`, `xgboost_model.pickle.dat`, `xgboost_model2.pickle.dat`, `xgboost_model2_aug.pickle.dat`) and fits the data (oiriganl or augmented). 
+
+It retruns the Classification report, the Confusion matrix for the test and train data and the accuracy score of the model.
 
 #### Model: [`xgboost_simple_model.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_simple_model.pickle.dat)
 
