@@ -12,21 +12,17 @@ In this project we aim to identify different fruits: apples, bananas, oranges an
 
 ## Data:
 
-Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo/fruit-recognition). We exported the Folders: `Apple`, `Banana`, `Orange` and `Tomato`. From this data, we also did a 20 % augmentation ([`image_augmentation.py`](https://github.com/anapysasi/ML_final_project/blob/main/image_augmentation.py)). In total, with the image augmentation, we had 15325 train samples images (12834 train samples originally) and 400 test samples.
+Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo/fruit-recognition). We exported the Folders: `Apple`, `Banana`, `Orange` and `Tomato`. 
 
-<img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400" />
+| <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="400" height="400" /> | 
+|:--:| 
+| *Example of  the data with the different labels* |
 
-<img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="400" height="400" />
-
-<figure class="image">
-  <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400">
-  <figcaption>{{Example of image augmentation}}</figcaption>
-</figure>
+From this data, we also did a 20 % augmentation ([`image_augmentation.py`](https://github.com/anapysasi/ML_final_project/blob/main/image_augmentation.py)). In total, with the image augmentation, we had 15325 train samples images (12834 train samples originally) and 400 test samples.
 
 | <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400" /> | 
 |:--:| 
-| *Space* |
-
+| *Example of image augmentation* |
 
 ---
 
