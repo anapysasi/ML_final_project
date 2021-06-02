@@ -48,6 +48,14 @@ By default it takes all the images available, including the ones form the data a
 
 ### File: [`image_augmentation.py`](https://github.com/anapysasi/ML_final_project/blob/main/image_augmentation.py)
 
+Creates a 20% of image augmention from the original dataset. It applies the following changes to the images:
+- Horizontal and Vertical Shift Augmentation
+- Random Rotation Augmentation
+- Random Brightness Augmentation
+- Random Zoom Augmentation
+
+It saves the new imgages in '/data/augmentation/'. If plot=True it reurns an example of 9 images after the transofmrations are applied.
+
 
 ## XGBoost
 
