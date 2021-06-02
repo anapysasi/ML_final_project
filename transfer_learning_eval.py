@@ -1,3 +1,10 @@
+"""
+This script loads an already built Image Recognition Transfer Learning model.
+It uses the loaded InceptionV3 model to check how accurate it is on test data.
+Accuraccy here does not come nearly as close to the accuracy we see in the train, validation phases due to the Batch Normalization error issue
+that the InceptionV3 base model suffers from. (https://github.com/keras-team/keras/pull/9965)
+"""
+
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.models import load_model
@@ -10,15 +17,17 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-# Specify the base directory where images are located.
+# Specify the base directory where images are located based on your machine & path
 # Mac
 base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
 # Windows
 # base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
+
 # Specify the traning, validation, and test dirrectories.
 train_dir = os.path.join(base_dir, 'data/Train')
 test_dir = os.path.join(base_dir, 'data/Test/Groups')
 augment_dir = os.path.join(base_dir, 'data/Augmentation')
+
 # Normalize the pixels in the train data images, resize and augment the data.
 train_datagen = ImageDataGenerator(
     rescale=1./255,# The image augmentaion function in Keras
@@ -50,12 +59,15 @@ augment_generator = augment_datagen.flow_from_directory(
     batch_size=16,
     class_mode='categorical')
 
+# Check image shapes to see if they align
 print(train_generator.image_shape)
 print(test_generator.image_shape)
 print(augment_generator.image_shape)
 
+# Generate a test label to see what the actual data looks like
 files, test_label, test_label_fruit = test_label_func()
 
+# Load a pre-trained and fitted model
 model = load_model("inceptionv3_transferlearning")
 print('\n Model download successfully')
 
@@ -72,39 +84,16 @@ for f1 in files:
     r = np.argmax(result, axis=1)
     results.append(r)
 
+# Eyeball test for test_label and results
 print(test_label)
 print(results)
 
+# Compute the accuracy score of the loaded model
 accuracy = accuracy_score(test_label, results)
 print('\n\nThe accuracy score is:', accuracy)
 
-# Summarize the fit of the model on the train data
+# Summarize the fit of the model on the test data
 print('\n Classification report of the test data: \n')
 print(metrics.classification_report(test_label, results))
 print('\n Confusion matrix of the test data: \n')
 print(metrics.confusion_matrix(test_label, results, normalize='true').round(3))
-
-
-# # Lets see how the model predicts on the train data
-# expected_train = y_train
-# predicted_train = model.predict(x_train)
-#
-# # Summarize the fit of the model on the train data
-# print('\n Classification report of the train data: \n')
-# print(metrics.classification_report(expected_train, predicted_train))
-# print('\n Confusion matrix of the train data: \n')
-# print(metrics.confusion_matrix(expected_train, predicted_train, normalize='true').round(3))
-#
-# # Make predictions
-# expected_y = y_test
-# predicted_y = model.predict(x_test)
-#
-# # Summarize the fit of the model on the predictions
-# print('\n Classification report of the test data: \n')
-# print(metrics.classification_report(expected_y, predicted_y))
-# print('\n Confusion matrix of the test data: \n')
-# print(metrics.confusion_matrix(expected_y, predicted_y, normalize='true').round(3))
-#
-# # Lets calculate the accuracy:
-# accuracy = accuracy_score(expected_y, predicted_y)
-# print('\n\nThe accuracy score is:', accuracy)
