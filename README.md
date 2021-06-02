@@ -31,6 +31,13 @@ Repo.clone_from("https://github.com/anapysasi/ML_final_project", "folderToSave")
 
 ## Handeling the data.
 
+#### File: [`train_test_split.py`](https://github.com/anapysasi/ML_final_project/blob/main/train_test_split.py)
+
+This script create a train generator and labels the test data. It has two functions:
+
+  *  `train_generator_func()`: uses `ImageDataGenerator()` and `flow_from_directory` from keras to create a train generator. The path= of the data, the shear_range, zoom_range, target_size and batch_size can be customize. <br> If `info=True` return how many images are there in the gerator and from what classes. If `plot=True` plots 4 random images with its labels.
+  *  `test_label_func()`: retunrs a vector with the files names(`files`), the labels of the classes for each corresponding file (`test_label`) and a vector with the corresponding fruit (`test_label_fruit`).
+
 #### File: [`train_test_cv2.py`](https://github.com/anapysasi/ML_final_project/blob/main/train_test_cv2.py)
 
 Has a function `train_generator_func()` that return the `x_train`, `y_train`, `x_test`, `y_test` from the dataset of images. Uses `cv2.IMREAD_GRAYSCALE` to read the images. You can customize the resize of the images (by changing the variables `img_size1`, `img_size_2`). The default size is (68,46).
@@ -38,9 +45,6 @@ Has a function `train_generator_func()` that return the `x_train`, `y_train`, `x
 The default of the function is to __reshape__ the data and __normailize__ it with `StandardScaler()`. This functionality can be trun of by setting `reshaped=False` as an argument.
 
 By default it takes all the images available, including the ones form the data augmentation. If you set `augmentation=False` it would only use the origianl images to train the model.
-
-#### File: [`train_test_split.py`](https://github.com/anapysasi/ML_final_project/blob/main/train_test_split.py)
-
 
 
 ## XGBoost
