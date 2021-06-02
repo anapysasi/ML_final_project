@@ -70,7 +70,7 @@ Run with the default variables. No changes to the function.
 - Min Sum of Instance Weight to Make Child: 1
 - Number of Trees: 100
 
-[[1.   0.   0.   0.  ]<br>
+[[1.00   0.00   0.00   0.00  ]<br>
  [0.51 0.42 0.06 0.01]<br>
  [0.36 0.07 0.57 0.  ]<br>
  [0.58 0.03 0.07 0.32]]<br>
