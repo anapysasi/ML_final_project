@@ -157,4 +157,24 @@ RandomizedSearchCV() based on the results of the previous model + image augmenta
 
 ## ResNet50
 
+## InceptionV3 transfer learning
+
+#### File: [`transfer_learning.py`](https://github.com/anapysasi/ML_final_project/blob/main/transfer_learning.py)
+
+File that creates and saves an InceptionV3 transfer learning model for the data. The base model is loaded and the top layers are added. One [`GlobalAveragePooling2D`] layer and two [`Dense`] layers. The model is saved as [`inceptionv3_transferlearning_v2`].
+
+#### File: [`transfer_learning_eval.py`](https://github.com/anapysasi/ML_final_project/blob/main/transfer_learning_eval.py)
+
+Loads and evaluates an InveptionV3 model. It prints the Accuracy Score, Classification report, the Confusion matrix for the test and train data for the model that is loaded.
+
+
 ## VGG16 transfer learning 
+
+#### File: [`transfer_learning_vgg.py`](https://github.com/anapysasi/ML_final_project/blob/main/transfer_learning_vgg.py)
+
+File that creates and saves a VGG16 transfer learning model's weights for the data. The base model is loaded and the top layers are added. One [`Flatten`] layer, two [`Dense`], and one [`Dropout`] layer. The model weights are saved as [`t1_model_v1.weights.best.hdf5`].
+
+#### File: [`transfer_learning_vgg_eval.py`](https://github.com/anapysasi/ML_final_project/blob/main/transfer_learning_vgg_eval.py)
+
+Loads and evaluates the VGG16 model weights. It prints the Accuracy Score, Classification report, the Confusion matrix for the test and train data for the model that is loaded.
+
