@@ -60,7 +60,7 @@ It saves the new imgages in '/data/augmentation/'. If plot=True it reurns an exa
 
 ## CNN
 
-#### File: [`cnn_complex_model.py`](https://github.com/FernandoForeroAcosta/ML_final_project/blob/main/cnn_complex_model.py)
+#### File: [`cnn_complex_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/cnn_complex_model.py)
 
 File that creates a more complex model by adding 28 layers to the CNN including Conv2D, LeakyRelu, Dropout and MaxPooling. The image size in this case is 256x256 and we tested the model with 3 epochs and 3 steps per epoch. 
 
