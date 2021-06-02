@@ -3,7 +3,7 @@ import pickle
 import warnings
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
-from train_test_xgboost import train_generator_func
+from train_test_cv2 import train_generator_func
 warnings.filterwarnings('ignore')
 
 x_train, y_train, x_test, y_test = train_generator_func()

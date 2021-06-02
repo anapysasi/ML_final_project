@@ -3,7 +3,7 @@ import pickle
 import warnings
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
-from train_test_xgboost import train_generator_func
+from train_test_cv2 import train_generator_func
 from sklearn.model_selection import RandomizedSearchCV
 warnings.filterwarnings('ignore')
 
