@@ -25,11 +25,12 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 np.random.seed(32)
 
+
 # Specify the base directory where images are located.
 # Mac
-# base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
+base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
 # Windows
-base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
+# base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
 # Specify the traning, validation, and test dirrectories.
 train_dir = os.path.join(base_dir, 'data/Train')
 test_dir = os.path.join(base_dir, 'data/Test/Groups')
@@ -89,7 +90,7 @@ history = model_InceptionV3.fit(
     verbose = 1,
     callbacks=[EarlyStopping(monitor='val_accuracy', patience = 5, restore_best_weights = True)])
 
-model_InceptionV3.save("inceptionv3_transferlearning")
+model_InceptionV3.save("inceptionv3_transferlearning_v2")
 
 # Create a dictionary of the model history
 history_dict = history.history

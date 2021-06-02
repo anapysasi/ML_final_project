@@ -12,9 +12,9 @@ warnings.filterwarnings('ignore')
 
 # Specify the base directory where images are located.
 # Mac
-# base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
+base_dir = '/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project'
 # Windows
-base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
+# base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
 # Specify the traning, validation, and test dirrectories.
 train_dir = os.path.join(base_dir, 'data/Train')
 test_dir = os.path.join(base_dir, 'data/Test/Groups')
@@ -56,7 +56,7 @@ print(augment_generator.image_shape)
 
 files, test_label, test_label_fruit = test_label_func()
 
-model = load_model("inceptionv3_transferlearning")
+model = load_model("inceptionv3_transferlearning_v2")
 print('\n Model download successfully')
 
 print('\n The final model is: \n', model)
@@ -75,14 +75,14 @@ for f1 in files:
 print(test_label)
 print(results)
 
-# accuracy = accuracy_score(test_label, results)
-# print('\n\nThe accuracy score is:', accuracy)
+accuracy = accuracy_score(test_label, results)
+print('\n\nThe accuracy score is:', accuracy)
 
-# # Summarize the fit of the model on the train data
-# print('\n Classification report of the train data: \n')
-# print(metrics.classification_report(test_label, results))
-# print('\n Confusion matrix of the train data: \n')
-# print(metrics.confusion_matrix(test_label, results, normalize='true').round(3))
+# Summarize the fit of the model on the train data
+print('\n Classification report of the train data: \n')
+print(metrics.classification_report(test_label, results))
+print('\n Confusion matrix of the train data: \n')
+print(metrics.confusion_matrix(test_label, results, normalize='true').round(3))
 
 
 # # Lets see how the model predicts on the train data
