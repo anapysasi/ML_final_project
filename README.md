@@ -184,9 +184,9 @@ File that creates and saves a VGG16 transfer learning model's weights for the da
 
 Loads and evaluates the VGG16 model weights. It prints the Accuracy Score, Classification report, the Confusion matrix for the test and train data for the model that is loaded.
 
-[[ 0.99 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.01 &nbsp; ]<br>
- [ 0.00 &nbsp; 1.00 &nbsp; 0.00 &nbsp; 0.00 &nbsp; ]<br>
- [ 0.00 &nbsp; 0.00 &nbsp; 1.00 &nbsp; 0.00 &nbsp; ]<br>
- [ 0.01 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.99 ]]<br>
+[[ 0.99 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.01 &nbsp;]<br>
+ [ 0.00 &nbsp; 1.00 &nbsp; 0.00 &nbsp; 0.00 &nbsp;]<br>
+ [ 0.00 &nbsp; 0.00 &nbsp; 1.00 &nbsp; 0.00 &nbsp;]<br>
+ [ 0.01 &nbsp; 0.00 &nbsp; 0.00 &nbsp; 0.99]]<br>
 
  Accuracy score: 0.9950
