@@ -56,6 +56,8 @@ Creates a 20% of image augmention from the original dataset. It applies the foll
 
 It saves the new imgages in '/data/augmentation/'. If plot=True it reurns an example of 9 images after the transofmrations are applied.
 
+## CNN
+
 
 ## XGBoost
 
@@ -153,4 +155,6 @@ RandomizedSearchCV() based on the results of the previous model + image augmenta
  
  Accuracy score: 0.6625
 
+## ResNet50
 
+## VGG16 transfer learning 
