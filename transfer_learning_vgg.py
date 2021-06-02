@@ -1,4 +1,10 @@
+"""
+This script builds an Image Recognition Transfer Learning model using tensorflow_hub. 
+It builds and saves a Vgg16 base model with a few additional top layers.
+Without a GPU, each epoch takes ~45 minutes to run.
+"""
 # https://www.learndatasci.com/tutorials/hands-on-transfer-learning-keras/
+
 # Let's first import some necessary libraries.
 import os
 from sklearn.metrics import accuracy_score
@@ -26,13 +32,15 @@ train_generator = ImageDataGenerator(rotation_range=90,
 
 test_generator = ImageDataGenerator(preprocessing_function=preprocess_input) # VGG16 preprocessing
 
+# Your base directory here
 base_dir = Path('/Users/Sambhav Jain/PycharmProjects/ML_final_project')
-# base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
 
+# Locate Train and Test data
 train_data_dir = base_dir/'data/Train'
 test_data_dir = base_dir/'data/Test/Groups'
 
-class_subset = sorted(os.listdir(base_dir/'data/Train'))[:4] # Using only the first 4 classes
+# Number of classes you have/trying to classify images into
+class_subset = sorted(os.listdir(base_dir/'data/Train'))[:4] # Four here 
 
 traingen = train_generator.flow_from_directory(train_data_dir,
                                                target_size=(224, 224),
@@ -144,16 +152,3 @@ vgg_history = vgg_model.fit(traingen,
                             validation_steps=n_val_steps,
                             callbacks=[tl_checkpoint_1, early_stop, plot_loss_1],
                             verbose=1)
-
-# Generate predictions
-vgg_model.load_weights('tl_model_v1.weights.best.hdf5') # initialize the best trained weights
-
-true_classes = testgen.classes
-class_indices = traingen.class_indices
-class_indices = dict((v,k) for k,v in class_indices.items())
-
-vgg_preds = vgg_model.predict(testgen)
-vgg_pred_classes = np.argmax(vgg_preds, axis=1)
-
-vgg_acc = accuracy_score(true_classes, vgg_pred_classes)
-print("VGG16 Model Accuracy without Fine-Tuning: {:.2f}%".format(vgg_acc * 100))
