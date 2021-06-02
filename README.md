@@ -146,7 +146,7 @@ Accuracy score: 0.5775
 [[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
  [ 0.41 &nbsp; 0.52 &nbsp; 0.06 &nbsp; 0.01 &nbsp; ]<br>
  [ 0.33 &nbsp; 0.03 &nbsp; 0.64 &nbsp; 0. &ensp; &nbsp; ]<br>
- [ 0.5 &ebsp; 0.04 &nbsp; 0.03 &nbsp; 0.43 ]]<br>
+ [ 0.5 &emsp; 0.04 &nbsp; 0.03 &nbsp; 0.43 ]]<br>
  
  Accuracy score: 0.6475
 
@@ -164,8 +164,8 @@ RandomizedSearchCV() based on the results of the previous model + image augmenta
 - Number of Trees: 800
 
 [[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
- [ 0.41 &nbsp; 0.56 &nbsp; 0.03 &nbsp; 0. &ebsp; &nbsp; ]<br>
- [ 0.29 &nbsp; 0.08 &nbsp; 0.63 &nbsp; 0. &ensp; &nbsp; ]<br>
+ [ 0.41 &nbsp; 0.56 &nbsp; 0.03 &nbsp; 0. &emsp; &nbsp; ]<br>
+ [ 0.29 &nbsp; 0.08 &nbsp; 0.63 &nbsp; 0. &emsp; &nbsp; ]<br>
  [ 0.49 &nbsp; 0.02 &nbsp; 0.03 &nbsp; 0.46 ]]<br>
  
  Accuracy score: 0.6625
