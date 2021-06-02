@@ -14,8 +14,9 @@ In this project we aim to identify different fruits: apples, bananas, oranges an
 
 Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo/fruit-recognition). We exported the Folders: `Apple`, `Banana`, `Orange` and `Tomato`. From this data, we also did a 20 % augmentation ([`image_augmentation.py`](https://github.com/anapysasi/ML_final_project/blob/main/image_augmentation.py)). In total, with the image augmentation, we had 15325 train samples images (12834 train samples originally) and 400 test samples.
 
-![Demo of the code](https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png =100x20)
-![Demo of the code](https://github.com/anapysasi/ML_final_project/blob/main/data_example.png =100x20)
+![](https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png =100x20)
+
+![](https://github.com/anapysasi/ML_final_project/blob/main/data_example.png =100x20)
 
 ---
 
