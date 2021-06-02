@@ -72,7 +72,7 @@ File that creates a more complex model by adding 28 layers to the CNN including 
 
 #### File: [`cnn_final_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/cnn_final_model.py)
 
-This file requires TENSFORFLOW 2.1.0 version
+<span style="color: red;">This file requires TENSFORFLOW 2.1.0 version</span>
 
 File that creates a model with the best results using CNN with Keras. Adding 8 layers to the CNN including Conv2D, MaxPooling, Flatten and Desnse layes.
 
