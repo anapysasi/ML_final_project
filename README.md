@@ -24,9 +24,9 @@ From this data, we also did a 20 % augmentation ([`image_augmentation.py`](https
 |:--:| 
 | *Example of image augmentation* |
 
-| <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="500" height="500" /> |  <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="500" height="500" /> | 
+| <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="500" height="500" /> |  <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="500" height="500" /> |  
 |:--:| :--:| 
-| *Example of image augmentation* | *Example of  the data with the different labels* |
+| *Example of  the data with the different labels* | *Example of image augmentation* | 
 
 ---
 
