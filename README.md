@@ -82,13 +82,13 @@ File that creates and saves a simple XGBoost model for the data. All the paramet
 
 #### File: [`xgboost_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model.py)
 
-Creates a more complex XGBoost model, by switching some of the parameters. It uses `RandomizedSearchCV()` to decide what parameters fit the data best. It can use either the original data or the augmented data depending on the parameter `augmentation`, teh dafault is `True`.
+Creates a more complex XGBoost model, by switching some of the parameters. It uses `RandomizedSearchCV()` to decide what parameters fit the data best. It can use either the original data or the augmented data depending on the parameter `augmentation`, the dafault is `True`.
 
 #### File: [`xgboost_eval.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_eval.py)
 
-Evaluates the different XGBoost models. It opens one of the saved models (`xgboost_simple_model.pickle.dat`, `xgboost_model.pickle.dat`, `xgboost_model2.pickle.dat`, `xgboost_model2_aug.pickle.dat`) and fits the data (oiriganl or augmented). 
+Evaluates the different XGBoost models. It opens one of the saved models (`xgboost_simple_model.pickle.dat`, `xgboost_model.pickle.dat`, `xgboost_model2.pickle.dat`, `xgboost_model2_aug.pickle.dat`) and fits the data (original or augmented). 
 
-It retruns the Classification report, the Confusion matrix for the test and train data and the accuracy score of the model.
+It returns the Classification report, the Confusion matrix for the test and train data and the accuracy score of the model
 
 #### Model: [`xgboost_simple_model.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_simple_model.pickle.dat)
 
