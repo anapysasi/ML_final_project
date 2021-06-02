@@ -33,7 +33,15 @@ Repo.clone_from("https://github.com/anapysasi/ML_final_project", "folderToSave")
 
 #### File: [`train_test_cv2.py`](https://github.com/anapysasi/ML_final_project/blob/main/train_test_cv2.py)
 
+Has a function `train_generator_func()` that return the `x_train`, `y_train`, `x_test`, `y_test` from the dataset of images. Uses `cv2.IMREAD_GRAYSCALE` to read the images. You can customize the resize of the images (by changing the variables `img_size1`, `img_size_2`). The default size is (68,46).
+
+The default of the function is to __reshape__ the data and __normailize__ it with `StandardScaler()`. This functionality can be trun of by setting `reshaped=False` as an argument.
+
+By default it takes all the images available, including the ones form the data augmentation. If you set `augmentation=False` it would only use the origianl images to train the model.
+
 #### File: [`train_test_split.py`](https://github.com/anapysasi/ML_final_project/blob/main/train_test_split.py)
+
+
 
 ## XGBoost
 
