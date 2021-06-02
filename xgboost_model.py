@@ -7,22 +7,22 @@ from train_test_xgboost import train_generator_func
 from sklearn.model_selection import RandomizedSearchCV
 warnings.filterwarnings('ignore')
 
-x_train, y_train, x_test, y_test = train_generator_func()
+x_train, y_train, x_test, y_test = train_generator_func(augmentation=True)
 print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples \n')
 
 # Create XGB Classifier object
-xgb_clf = xgb.XGBClassifier(objective="multi:softmax")
+xgb_clf = xgb.XGBClassifier(tree_method="exact", predictor="cpu_predictor",
+                            objective="multi:softmax")
 
-# Create parameter grid
 parameters = {"learning_rate": [0.1, 0.01, 0.001],
-              "gamma": [0.1, 0.3, 0.5, 1],
-              "max_depth": [2, 4, 7, 10],
-              "subsample": [0.5, 0.7, 1],
-              "reg_alpha": [0, 0.5, 1],
-              "reg_lambda": [1, 1.5, 2, 3, 4.5],
-              "min_child_weight": [1, 3, 5, 7],
-              "n_estimators": [100, 250, 500, 1000]}
+              "gamma": [0.1, 0.5, 1, 2, 5],
+              "max_depth": [2, 4, 6, 10],
+              "subsample": [0.4, 0.6, 0.8, 1],
+              "reg_alpha": [1, 1.5, 2, 3, 4.5, 10],
+              "reg_lambda": [1, 2.5, 5, 7],
+              "min_child_weight": [1, 3, 5, 7, 10],
+              "n_estimators": [100, 250, 500, 800, 1000]}
 
 # Create RandomizedSearchCV Object
 xgb_rscv = RandomizedSearchCV(xgb_clf, param_distributions=parameters, scoring="f1_micro",
@@ -46,7 +46,7 @@ model.fit(x_train, y_train)
 print('\n The final model is: \n', model)
 
 # save model to file
-pickle.dump(model, open('xgboost_model.pickle.dat', 'wb'))
+pickle.dump(model, open('xgboost_model2_augm.pickle.dat', 'wb'))
 
 # Lets see how the model predicts on the train data
 expected_train = y_train
@@ -70,4 +70,4 @@ print(metrics.confusion_matrix(expected_y, predicted_y, normalize='true').round(
 
 # Lets calculate the accuracy:
 accuracy = accuracy_score(expected_y, predicted_y)
-print('\n\nThe accuracy score is:', accuracy)
+print('\n\n The accuracy score is:', accuracy)
