@@ -23,7 +23,7 @@ Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo
   <figcaption>{{Example of image augmentation}}</figcaption>
 </figure>
 
-| ![space-1.jpg]<img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400" /> | 
+| <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400" /> | 
 |:--:| 
 | *Space* |
 
