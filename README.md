@@ -51,11 +51,31 @@ By default it takes all the images available, including the ones form the data a
 
 #### File: [`xgboost_simple_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_simple_model.py)
 
+File that creates and saves a simple XGBoost model for the data. All the parameters are the default ones.
+
 #### File: [`xgboost_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model.py)
 
 #### File: [`xgboost_eval.py`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_eval.py)
 
 #### Model: [`xgboost_simple_model.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_simple_model.pickle.dat)
+
+Run with the default variables. No changes to the function. 
+
+- Learning Rate: 0.3
+- Gamma: 0
+- Max Depth: 6
+- Subsample: 1
+- Alpha: 0
+- Lambda: 1
+- Min Sum of Instance Weight to Make Child: 1
+- Number of Trees: 100
+
+[[1.   0.   0.   0.  ]
+ [0.51 0.42 0.06 0.01]
+ [0.36 0.07 0.57 0.  ]
+ [0.58 0.03 0.07 0.32]]
+
+accuracy: 0.5775
 
 #### Model: [`xgboost_model.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model.pickle.dat)
 
@@ -64,5 +84,3 @@ By default it takes all the images available, including the ones form the data a
 #### Model: [`xgboost_model2_augm.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model2_augm.pickle.dat)
 
 
-
-File that prepares the 
