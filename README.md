@@ -72,8 +72,6 @@ File that creates a more complex model by adding 28 layers to the CNN including 
 
 #### File: [`cnn_final_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/cnn_final_model.py)
 
-<span style="color:red">This file requires TENSFORFLOW 2.1.0 version</span>
-
 ```diff
 - This file requires TENSFORFLOW 2.1.0
 ```
