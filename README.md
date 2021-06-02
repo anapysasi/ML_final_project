@@ -19,7 +19,7 @@ Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo
 <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="400" height="400" />
 
 <figure class="image">
-  <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400" />
+  <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="400" height="400" >
   <figcaption>{{Example of image augmentation}}</figcaption>
 </figure>
 
