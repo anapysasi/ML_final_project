@@ -75,12 +75,66 @@ Run with the default variables. No changes to the function.
  [ 0.36 &nbsp; 0.07 &nbsp; 0.57 &nbsp; 0. &ensp; &nbsp; ]<br>
  [ 0.58 &nbsp; 0.03 &nbsp; 0.07 &nbsp; 0.32 ]]<br>
 
-accuracy: 0.5775
+Accuracy score: 0.5775
 
 #### Model: [`xgboost_model.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model.pickle.dat)
 
+`RandomizedSearchCV()` with a dictionary of parameters. Best parameters:
+
+- Learning Rate: 0.1
+- Gamma:1 
+- Max Depth:7 
+- Subsample:0.7 
+- Alpha:1 
+- Lambda:3 
+- Min Sum of Instance Weight to Make Child: 7 
+- Number of Trees: 500
+
+[[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
+ [ 0.44 &nbsp; 0.47 &nbsp; 0.07 &nbsp; 0.02 &nbsp; ]<br>
+ [ 0.35 &nbsp; 0.06 &nbsp; 0.59 &nbsp; 0. &ensp; &nbsp; ]<br>
+ [ 0.53 &nbsp; 0.03 &nbsp; 0.03 &nbsp; 0.41 ]]<br>
+ 
+ Accuracy score: 0.6175
+
 #### Model: [`xgboost_model2.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model2.pickle.dat)
 
+`RandomizedSearchCV()` based on the results of the previous model.
+
+- Learning Rate: 0.1
+- Gamma:1 
+- Max Depth:6 
+- Subsample:0.6
+- Alpha:1 
+- Lambda:2.5
+- Min Sum of Instance Weight to Make Child: 10 
+- Number of Trees: 600
+
+[[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
+ [ 0.41 &nbsp; 0.52 &nbsp; 0.06 &nbsp; 0.01 &nbsp; ]<br>
+ [ 0.33 &nbsp; 0.03 &nbsp; 0.64 &nbsp; 0. &ensp; &nbsp; ]<br>
+ [ 0.5 &ebsp; 0.04 &nbsp; 0.03 &nbsp; 0.43 ]]<br>
+ 
+ Accuracy score: 0.6475
+
 #### Model: [`xgboost_model2_augm.pickle.dat`](https://github.com/anapysasi/ML_final_project/blob/main/xgboost_model2_augm.pickle.dat)
+
+RandomizedSearchCV() based on the results of the previous model + image augmentation
+
+- Learning Rate: 0.1
+- Gamma:1 
+- Max Depth:6 
+- Subsample:0.6
+- Alpha:1 
+- Lambda:2.5
+- Min Sum of Instance Weight to Make Child: 10 
+- Number of Trees: 800
+
+[[ 1. &emsp;  0.  &emsp; &nbsp;  0. &emsp;  &nbsp; 0.&emsp; &nbsp; ]<br>
+ [ 0.41 &nbsp; 0.56 &nbsp; 0.03 &nbsp; 0. &ebsp; &nbsp; ]<br>
+ [ 0.29 &nbsp; 0.08 &nbsp; 0.63 &nbsp; 0. &ensp; &nbsp; ]<br>
+ [ 0.49 &nbsp; 0.02 &nbsp; 0.03 &nbsp; 0.46 ]]<br>
+ 
+ Accuracy score: 0.6625
 
 
