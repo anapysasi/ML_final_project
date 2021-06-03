@@ -54,7 +54,7 @@ def train_generator_func(path='data/Train', info=False, image=False, shear_range
             _ = ax.set_title(f'Label = {np.argmax(label[i])}')
             _ = ax.imshow(img[i])
         plt.show()
-    return train_generator
+    return train_generator, train_data_generator
 
 
 def test_label_func():

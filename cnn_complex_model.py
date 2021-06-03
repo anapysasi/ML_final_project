@@ -1,10 +1,13 @@
+"""
+File that creates a more complex model by adding 28 layers to the CNN including Conv2D, LeakyRelu, Dropout & MaxPooling.
+The image size in this case is 256x256 and we tested the model with 3 epochs and 3 steps per epoch.
+"""
 import tensorflow as tf
 import numpy as np
 from train_test_split import train_generator_func
 from train_test_split import test_label_func
-from sklearn.metrics import accuracy_score
 
-train_generator = train_generator_func(info=True, target_size1= 256, target_size2= 256)
+train_generator, _ = train_generator_func(info=True, target_size1=256, target_size2=256)
 files, test_label, test_label_fruit = test_label_func()
 
 image_classifier = tf.keras.Sequential()
