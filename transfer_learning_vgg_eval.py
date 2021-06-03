@@ -3,12 +3,11 @@ This script loads an already built Image Recognition Transfer Learning model.
 It uses the loaded VGG16 model to check how accurate it is on test data.
 VGG16 does not use any Batch Normalization, so it does not run into any issues.
 """
-
 import os
 import numpy as np
+import platform
 from keras.preprocessing.image import ImageDataGenerator
 from keras.applications.vgg16 import VGG16, preprocess_input
-from pathlib import Path
 from sklearn.metrics import accuracy_score
 from sklearn import metrics
 from keras.layers import Dense, Dropout, Flatten
@@ -17,7 +16,7 @@ from keras.models import Model
 # Set parameters used in creating the train, test, validation generators
 BATCH_SIZE = 64
 input_shape = (224, 224, 3)
-n_classes=4
+n_classes = 4
 
 train_generator = ImageDataGenerator(rotation_range=90,
                                      brightness_range=[0.1, 0.7],
@@ -26,23 +25,18 @@ train_generator = ImageDataGenerator(rotation_range=90,
                                      horizontal_flip=True,
                                      vertical_flip=True,
                                      validation_split=0.15,
-                                     preprocessing_function=preprocess_input) # VGG16 preprocessing
+                                     preprocessing_function=preprocess_input)
 
-test_generator = ImageDataGenerator(preprocessing_function=preprocess_input) # VGG16 preprocessing
+test_generator = ImageDataGenerator(preprocessing_function=preprocess_input)
 
-# Choose your base dir depending on your OS
-# Mac
-base_dir = Path('/Users/sj/Desktop/Things/UChicago/Winter 2021/ML_final_project')
+if platform.system() == "Windows":
+    train_data_dir = os.path.join('data\\Train')
+    test_data_dir = os.path.join('data\\Test\\Groups')
+else:
+    train_data_dir = os.path.join('data/Train')
+    test_data_dir = os.path.join('data/Test/Groups')
 
-# Windows
-# base_dir = '/Users/Sambhav Jain/PycharmProjects/ML_final_project'
-
-# Locate Train & Test datasets
-train_data_dir = base_dir/'data/Train'
-test_data_dir = base_dir/'data/Test/Groups'
-
-class_subset = sorted(os.listdir(base_dir/'data/Train'))[:4] # Using only the first 4 classes
-
+class_subset = sorted(train_data_dir)[:4]
 
 traingen = train_generator.flow_from_directory(train_data_dir,
                                                target_size=(224, 224),
@@ -71,9 +65,7 @@ testgen = test_generator.flow_from_directory(test_data_dir,
                                              seed=42)
 
 # Create an instance of a VGG16 model that you can load the pre-saved weights to, without re-fitting the model
-conv_base = VGG16(include_top=False,
-                      weights='imagenet',
-                      input_shape=input_shape)
+conv_base = VGG16(include_top=False, weights='imagenet', input_shape=input_shape)
 
 # Replicating the exact model on which the weights are saved
 top_model = conv_base.output
@@ -87,11 +79,12 @@ output_layer = Dense(n_classes, activation='softmax')(top_model)
 vgg_model = Model(inputs=conv_base.input, outputs=output_layer)
 
 # Generate predictions
-vgg_model.load_weights('tl_model_v1.weights.best.hdf5') # initialize the best trained weights
+# initialize the best trained weights
+vgg_model.load_weights('tl_model_v1.weights.best.hdf5')
 
 true_classes = testgen.classes
 class_indices = traingen.class_indices
-class_indices = dict((v,k) for k,v in class_indices.items())
+class_indices = dict((v, k) for k, v in class_indices.items())
 
 vgg_preds = vgg_model.predict(testgen)
 vgg_pred_classes = np.argmax(vgg_preds, axis=1)
