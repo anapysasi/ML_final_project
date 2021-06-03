@@ -3,7 +3,6 @@ This script has a function [train_generator_func()] that creates a generator for
 test_label_func() returns a vector with the files paths (files), the labels of the test files (test_label)
 and a vector with specifically the  fruit (test_label_fruit)
 """
-
 import os
 import glob
 import tensorflow as tf
