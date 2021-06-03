@@ -12,7 +12,13 @@ In this project we aim to identify different fruits: apples, bananas, oranges an
 
 ## Data:
 
-Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo/fruit-recognition). We exported the Folders: `Apple`, `Banana`, `Orange` and `Tomato`. From this data, we also did a 20 % augmentation ([`image_augmentation.py`](https://github.com/anapysasi/ML_final_project/blob/main/image_augmentation.py)). In total, with the image augmentation, we had 15325 train samples images (12834 train samples originally) and 400 test samples.
+Data retrieved from [kaggle: Fruit Recognition](https://www.kaggle.com/chrisfilo/fruit-recognition). We exported the Folders: `Apple`, `Banana`, `Orange` and `Tomato`. 
+
+From this data, we also did a 20 % augmentation (image_augmentation.py). In total, with the image augmentation, we had 15325 train samples images (12834 train samples originally) and 400 test samples.
+
+| <img src="https://github.com/anapysasi/ML_final_project/blob/main/data_example.png" width="500" height="500" /> |  <img src="https://github.com/anapysasi/ML_final_project/blob/main/image_aumentation.png" width="500" height="500" /> |  
+|:--:| :--:| 
+| *Example of  the data with the different labels* | *Example of image augmentation* | 
 
 ---
 
@@ -66,9 +72,11 @@ File that creates a more complex model by adding 28 layers to the CNN including 
 
 #### File: [`cnn_final_model.py`](https://github.com/anapysasi/ML_final_project/blob/main/cnn_final_model.py)
 
-This file requires TENSFORFLOW 2.1.0 version
+```diff
+- This file requires TENSFORFLOW 2.1.0
+```
 
-File that creates a model with the best results using CNN with Keras. Adding 8 layers to the CNN including Conv2D, MaxPooling, Flatten and Desnse layes.
+File that creates a model with the best results using CNN with Keras. Adding 8 layers to the CNN including Conv2D, MaxPooling, Flatten and Dense layers.
 
 Accuracy score: 0.701
 
