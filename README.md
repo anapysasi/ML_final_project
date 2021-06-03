@@ -76,7 +76,7 @@ File that creates a more complex model by adding 28 layers to the CNN including 
 - This file requires TENSFORFLOW 2.1.0
 ```
 
-File that creates a model with the best results using CNN with Keras. Adding 8 layers to the CNN including Conv2D, MaxPooling, Flatten and Desnse layes.
+File that creates a model with the best results using CNN with Keras. Adding 8 layers to the CNN including Conv2D, MaxPooling, Flatten and Dense layers.
 
 Accuracy score: 0.701
 
