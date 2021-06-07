@@ -180,23 +180,6 @@ RandomizedSearchCV() based on the results of the previous model + image augmenta
 
 ---
 
-## ResNet50
-
-#### File: [`ResNet-Final.py`](https://github.com/anapysasi/ML_final_project/blob/main/ResNet-Final.py)
-
-File that creates and contains 3 ResNet models and their evaluation metrics based on their performance on our Train and Validation Dataset. 
-
-#### Model 1: ['ResNet50Base.h5] - Trained on ImageNet (Weight='ImageNet'), Pooling = Max - run for 10 Epochs, 100 Steps per Epoch
-  Accuracy score: 0.2525
-
-#### Model 2: ['ResNet50Base.h5] - Trained on Train Dataset (Weights = None), Pooling = Max - run for 10 Epochs, 50 Steps per Epoch
-   Accuracy score: 0.23
-   
-#### Model 3: ['ResNet50Base.h5] - Trained on Train Dataset (Weights = None), Pooling = Max - run for 20 Epochs, 50 Steps per Epoch
-  Accuracy score: 0.265
-
----
-
 
 ## InceptionV3 transfer learning
 
