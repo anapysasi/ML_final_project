@@ -8,7 +8,7 @@ Final project for Dr. Arnab Bose's Real Machine Learning & Predictive Analytics 
 
 ## Description:
 
-In this project we aim to identify different fruits: apples, bananas, oranges and tomatoes through different Machine Learnign algorithms: CNN, XGBoost, ResNet50, InceptionV3 transfer learning and VGG16 transfer learning 
+In this project we aim to identify different fruits: apples, bananas, oranges and tomatoes through different Machine Learnign algorithms: CNN, XGBoost, InceptionV3 transfer learning and VGG16 transfer learning 
 
 ## Data:
 
